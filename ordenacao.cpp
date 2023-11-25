@@ -59,7 +59,7 @@ void merge_sort(int a[], int i1, int j1, int i2, int j2){
     temp[k++] = a[i++];
   while (j <= j2)
     temp[k++] = a[j++];
-  for (i = i1, j = 0;i <= j2;i++, j++)
+  for (i = i1, j = 0;i <= j2;i++, j++) 
     a[i] = temp[j];
   delete[] temp;
 }
@@ -86,23 +86,23 @@ bool ordenado(int a[], int t){
 int main(){
     int n;
     
-    cout << "Quantidade de itens na estrutura:";
+    //cout << "Quantidade de itens na estrutura:";
     cin >> n;
     int lista[n];
 
-    cout << "\nInsira os dados:";
+    //cout << "\nInsira os dados:";
     for(int i = 0; i < n; i++){
         int temp; cin >> temp;
         lista[i] = temp;
     }
 
-    cout << "\nSelecione o metodo de ordenacao:\ns-Selecao\ni-Insercao\nm-Merge\n";
-    char escolha; cin >> escolha;
+    //cout << "\nSelecione o metodo de ordenacao:\ns-Selecao\ni-Insercao\nm-Merge\n";
+    char escolha = 's'; //cin >> escolha;
 
-    cout << endl;
-    if(ordenado(lista, n)) cout << "Ordenado";
-    else cout << "Nao ordenado";
-    cout << endl; 
+    //cout << endl;
+    //if(ordenado(lista, n)) cout << "Ordenado";
+    //else cout << "Nao ordenado";
+    //cout << endl; 
 
     auto inicio = chrono::high_resolution_clock::now();
 
@@ -114,16 +114,16 @@ int main(){
             insercao(lista, n);
             break;
         case 'm':
-            merge(lista, 0, n);
+            merge(lista, 0, n-1);
             break;
     }
 
 
     auto fim = chrono::high_resolution_clock::now();
     auto duracao = fim - inicio;
-    cout << duracao.count() << " Clocks\n";
+    cerr << duracao.count() << "\n";
 
-    for(auto x : lista) cout << x << " ";
-    cout << endl;
+    //for(auto x : lista) cout << x << " ";
+    //cout << endl;
 
 } 

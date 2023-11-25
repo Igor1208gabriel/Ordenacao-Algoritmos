@@ -12,11 +12,7 @@ using namespace std;
 //   return indice;
 // } achei mais prático fazer pelas funções já existentes, mas decidi não apagar a que eu fiz, já que são equivalentes.
 
-void bbsort(int a[], int t){
-  for(int i = 0; i < t; i++){
-
-  }
-}
+//void bbsort(int a[], int t){}
 
 
 void selecao(int a[], unsigned int t){  //Tempo: O(n²) / espaço: O(1)

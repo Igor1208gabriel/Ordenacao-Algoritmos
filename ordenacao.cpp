@@ -93,7 +93,7 @@ int main(){
     }
 
     //cout << "\nSelecione o metodo de ordenacao:\ns-Selecao\ni-Insercao\nm-Merge\n";
-    char escolha = 's'; //cin >> escolha;
+    char escolha = 's'; // alterar para testes com diferentes algoritmos
 
     //cout << endl;
     //if(ordenado(lista, n)) cout << "Ordenado";

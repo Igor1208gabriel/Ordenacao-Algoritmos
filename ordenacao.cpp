@@ -1,29 +1,43 @@
-int acharminimo(int comeco, int a[], unsigned int t){
-  int menor = a[comeco];
-  int indice = comeco;
-  for(unsigned int i = comeco+1; i < t; i++){
-    if(a[i] < menor) { menor = a[i]; indice = i; }
-  }
-  return indice;
-}
+#include <iostream>   //para input e output
+#include <chrono>     //para contagem de tempo
+#include <algorithm>  //para min_element()
+using namespace std;
+  
+//   int acharminimo(int comeco, int a[], unsigned int t){
+//   int menor = a[comeco];
+//   int indice = comeco;
+//   for(unsigned int i = comeco+1; i < t; i++){
+//     if(a[i] < menor) { menor = a[i]; indice = i; }
+//   }
+//   return indice;
+// } achei mais prático fazer pelas funções já existentes, mas decidi não apagar a que eu fiz, já que são equivalentes.
 
-void selecao(int a[], unsigned int t){  //Tempo: O(n²) / espaço: O(n)
-  int b[t];
+void selecao(int a[], unsigned int t){  //Tempo: O(n²) / espaço: O(1)
   for(unsigned int i = 0; i < t; i++){
-    int indmenor = acharminimo(i, a, t);
-    for(unsigned int j = indmenor; j < t-1; j++){
-      a[j] = a[j+1];
-    }
-    b[i] = a[i];
+    //acha o menor
+    int indmenor = distance(a, min_element(a+i, a+t)); //segundo cppreference, O(n)
+    
+    //troca 
+    int temp = a[i];
+    a[i] = a[indmenor];
+    a[indmenor] = temp;
   }
-    for(unsigned int j = 0; j < t; j++){
-      a[j] = b[j];
-    }
 }
 
-void insercao(int a[], int t){}
+void insercao(int a[], int t){  //o(n²)
 
-void merge(int a[], int t){}
+  for(int i = 0; i < t; i++){   //O(n)
+    int j = i;
+    while(j > 0 && a[j-1] > a[j]){ //O(n)
+      int temp = a[j];
+      a[j] = a[j-1];
+      a[j-1] = temp;
+      j--;
+    }
+  }
+}
+
+//void merge(int a[], int t){}
 
 bool ordenado(int a[], int t){
     for(int i = 0; i < t-1; i++){
@@ -33,9 +47,7 @@ bool ordenado(int a[], int t){
 }
 
 
-#include <iostream>
-#include <chrono>
-using namespace std;
+
 
 int main(){
     int n;
@@ -65,12 +77,12 @@ int main(){
             selecao(lista, n);
             break;
         case 'i':
-            cout << "TODO\n";
+            insercao(lista, n);
             break;
         case 'm':
+            //merge(lista, n);
             cout << "TODO\n";
             break;
-
     }
 
 

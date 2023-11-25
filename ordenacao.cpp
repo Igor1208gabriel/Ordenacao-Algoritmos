@@ -12,6 +12,13 @@ using namespace std;
 //   return indice;
 // } achei mais prático fazer pelas funções já existentes, mas decidi não apagar a que eu fiz, já que são equivalentes.
 
+void bbsort(int a[], int t){
+  for(int i = 0; i < t; i++){
+
+  }
+}
+
+
 void selecao(int a[], unsigned int t){  //Tempo: O(n²) / espaço: O(1)
   for(unsigned int i = 0; i < t; i++){
     //acha o menor
@@ -37,8 +44,35 @@ void insercao(int a[], int t){  //o(n²)
   }
 }
 
-//void merge(int a[], int t){}
 
+void merge_sort(int a[], int i1, int j1, int i2, int j2){
+  int *temp = new int[((j1 - i1) + (j2 - i2) + 2)];
+  int i = i1, j = i2, k = 0;
+  
+  while(i <= j1 && j <= j2){
+    if (a[i] < a[j])
+      temp[k++] = a[i++];
+    else
+      temp[k++] = a[j++];
+  }
+  while (i <= j1)
+    temp[k++] = a[i++];
+  while (j <= j2)
+    temp[k++] = a[j++];
+  for (i = i1, j = 0;i <= j2;i++, j++)
+    a[i] = temp[j];
+  delete[] temp;
+}
+
+void merge(int a[], int primeiro, int ultimo){
+  int meio = (ultimo+primeiro)/2;
+  if (primeiro < ultimo) {
+    meio = (primeiro + ultimo) / 2;
+    merge(a, primeiro, meio);
+    merge(a, meio + 1, ultimo);
+    merge_sort(a, primeiro, meio, meio + 1, ultimo);
+  }
+}
 bool ordenado(int a[], int t){
     for(int i = 0; i < t-1; i++){
         if(a[i] > a[i+1])return false;
@@ -80,8 +114,7 @@ int main(){
             insercao(lista, n);
             break;
         case 'm':
-            //merge(lista, n);
-            cout << "TODO\n";
+            merge(lista, 0, n);
             break;
     }
 
